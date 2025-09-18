@@ -1,6 +1,7 @@
 package com.example.springai.controller;
 
 import com.example.springai.service.AiService;
+import com.example.springai.service.AiServiceByChatClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AiController {
 
-    private final AiService aiService;
+    private final AiServiceByChatClient aiService;
 
     @PostMapping(
             value = "/chat-model",

@@ -1,6 +1,7 @@
 package com.example.springai.controller;
 
 import com.example.springai.service.AiService;
+import com.example.springai.service.AiServiceByChatClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -16,7 +17,7 @@ import reactor.core.publisher.Flux;
 @RequiredArgsConstructor
 public class FluxAiController {
 
-    private final AiService aiService;
+    private final AiServiceByChatClient aiService;
 
     @PostMapping(
             value = "/chat-model-stream",
