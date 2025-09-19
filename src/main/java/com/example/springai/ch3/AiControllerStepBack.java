@@ -1,7 +1,6 @@
-package com.example.springai.controller;
+package com.example.springai.ch3;
 
-import com.example.springai.service.AiService;
-import com.example.springai.service.AiServiceByChatClient;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -11,23 +10,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/ai")
-@Slf4j
 @RequiredArgsConstructor
-public class AiController {
+@Slf4j
+@RequestMapping("/ai")
+public class AiControllerStepBack {
 
-    private final AiServiceByChatClient aiService;
+    private final AiServiceStepBackPrompt aiService;
 
     @PostMapping(
-            value = "/chat-model",
+            value = "/step-back-prompt",
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             produces = MediaType.TEXT_PLAIN_VALUE
     )
-    public String chatModel(@RequestParam("question") String question) {
-        log.info(question);
-
-        String answerText = aiService.generateText(question);
-
-        return answerText;
+    public String request(@RequestParam("question") String question) throws Exception {
+        return aiService.process(question);
     }
 }

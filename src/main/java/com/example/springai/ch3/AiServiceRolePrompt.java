@@ -1,4 +1,4 @@
-package com.example.springai.service;
+package com.example.springai.ch3;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.ChatOptions;

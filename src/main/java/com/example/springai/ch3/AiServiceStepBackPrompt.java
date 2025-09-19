@@ -1,4 +1,4 @@
-package com.example.springai.service;
+package com.example.springai.ch3;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

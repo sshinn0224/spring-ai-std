@@ -1,6 +1,5 @@
-package com.example.springai.controller;
+package com.example.springai.ch3;
 
-import com.example.springai.service.AiServiceListOutputConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -8,24 +7,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
 
 @RestController
 @RequestMapping("/ai")
-@Slf4j
 @RequiredArgsConstructor
-public class AiControllerListOutputConverter {
+@Slf4j
+public class AiControllerDefaultMethod {
 
-    private final AiServiceListOutputConverter aiService;
+    private final AiServiceDefaultMethod aiService;
 
     @PostMapping(
-            value = "/list-output-converter",
+            value = "/default-method",
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
+            produces = MediaType.APPLICATION_NDJSON_VALUE
     )
-    public List<String> request(@RequestParam("city") String city) {
-        return aiService.process2(city);
-//        return aiService.process(city);
+    public Flux<String> defaultMethod(@RequestParam("question") String question) {
+        Flux<String> response = aiService.defaultMethod(question);
+
+        return response;
     }
 }

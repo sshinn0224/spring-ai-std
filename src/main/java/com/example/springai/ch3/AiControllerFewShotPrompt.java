@@ -1,6 +1,5 @@
-package com.example.springai.controller;
+package com.example.springai.ch3;
 
-import com.example.springai.service.AiServiceSelfConsistency;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -13,16 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/ai")
 @Slf4j
 @RequiredArgsConstructor
-public class AiControllerSelfConsistency {
+public class AiControllerFewShotPrompt {
 
-    private final AiServiceSelfConsistency aiService;
+    private final AiServiceFewShotPrompt aiService;
 
     @PostMapping(
-            value = "/self-consistency",
+            value = "/few-shot-prompt",
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
-            produces = MediaType.TEXT_PLAIN_VALUE
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public String request(@RequestParam("content") String content) {
-        return aiService.process(content);
+    public String fewShotPrompt(@RequestParam("order") String order) {
+        String res = aiService.fewShotPrompt(order);
+        log.info(res.toString());
+        return res;
     }
 }

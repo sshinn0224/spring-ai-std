@@ -1,7 +1,5 @@
-package com.example.springai.controller;
+package com.example.springai.ch3;
 
-import com.example.springai.service.AiService;
-import com.example.springai.service.AiServiceDefaultMethod;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -11,24 +9,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
-import java.util.Map;
-
 @RestController
-@RequestMapping("/ai")
 @RequiredArgsConstructor
 @Slf4j
-public class AiControllerDefaultMethod {
+@RequestMapping("/ai")
+public class AiControllerRolePrompt {
 
-    private final AiServiceDefaultMethod aiService;
+    private final AiServiceRolePrompt aiService;
 
     @PostMapping(
-            value = "/default-method",
+            value = "/role-assignment",
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             produces = MediaType.APPLICATION_NDJSON_VALUE
     )
-    public Flux<String> defaultMethod(@RequestParam("question") String question) {
-        Flux<String> response = aiService.defaultMethod(question);
-
-        return response;
+    public Flux<String> doRequest(@RequestParam("requirements") String requirements) {
+        return aiService.doRequest(requirements);
     }
 }

@@ -1,6 +1,5 @@
-package com.example.springai.controller;
+package com.example.springai.ch3;
 
-import com.example.springai.service.AiServiceByPromptTemplate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;

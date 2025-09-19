@@ -1,6 +1,5 @@
-package com.example.springai.service;
+package com.example.springai.ch3;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.messages.AssistantMessage;
