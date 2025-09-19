@@ -1,5 +1,6 @@
-package com.example.springai.ch3;
+package com.example.springai.ch3.controller;
 
+import com.example.springai.ch3.service.AiServiceMultiMessage;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

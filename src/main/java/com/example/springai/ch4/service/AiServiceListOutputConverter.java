@@ -1,5 +1,6 @@
-package com.example.springai.ch3;
+package com.example.springai.ch4.service;
 
+import com.example.springai.ch4.service.dto.Hotel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.Prompt;
@@ -52,4 +53,5 @@ public class AiServiceListOutputConverter {
 
         return hotelList;
     }
+
 }

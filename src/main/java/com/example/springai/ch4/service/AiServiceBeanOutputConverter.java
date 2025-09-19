@@ -38,6 +38,15 @@ public class AiServiceBeanOutputConverter {
 
         Hotel hotel = converter.convert(json);
         return hotel;
+    }
 
+
+    public Hotel process2(String city) {
+        Hotel hotel = chatClient.prompt()
+                .user("%s에서 유명한 호텔 목록 5개를 출력하세요.".formatted(city))
+                .call()
+                .entity(Hotel.class);
+
+        return hotel;
     }
 }

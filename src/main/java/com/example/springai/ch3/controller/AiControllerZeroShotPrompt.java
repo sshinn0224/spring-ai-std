@@ -1,6 +1,6 @@
-package com.example.springai.ch3;
+package com.example.springai.ch3.controller;
 
-
+import com.example.springai.ch3.service.AiServiceZeroShotPrompt;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequiredArgsConstructor
-@Slf4j
 @RequestMapping("/ai")
-public class AiControllerStepBack {
+@Slf4j
+@RequiredArgsConstructor
+public class AiControllerZeroShotPrompt {
 
-    private final AiServiceStepBackPrompt aiService;
+    private final AiServiceZeroShotPrompt aiService;
 
     @PostMapping(
-            value = "/step-back-prompt",
+            value = "/zero-shot-prompt",
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             produces = MediaType.TEXT_PLAIN_VALUE
     )
-    public String request(@RequestParam("question") String question) throws Exception {
-        return aiService.process(question);
+    public String zeroShotPrompt(@RequestParam("review") String review) {
+        return aiService.zeroShotPrompt(review);
     }
 }

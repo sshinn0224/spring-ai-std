@@ -24,6 +24,7 @@ public class AiControllerBeanOutput {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public Hotel request(@RequestParam("city") String city) {
-        return aiService.process(city);
+        return aiService.process2(city);
+//        return aiService.process(city);
     }
 }

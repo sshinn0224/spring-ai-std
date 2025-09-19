@@ -1,4 +1,4 @@
-package com.example.springai.ch3;
+package com.example.springai.ch3.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;

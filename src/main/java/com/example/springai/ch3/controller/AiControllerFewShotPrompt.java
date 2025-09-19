@@ -1,5 +1,6 @@
-package com.example.springai.ch3;
+package com.example.springai.ch3.controller;
 
+import com.example.springai.ch3.service.AiServiceFewShotPrompt;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -7,22 +8,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Flux;
 
 @RestController
 @RequestMapping("/ai")
-@RequiredArgsConstructor
 @Slf4j
-public class AiControllerCot {
+@RequiredArgsConstructor
+public class AiControllerFewShotPrompt {
 
-    private final AiServiceCot aiService;
+    private final AiServiceFewShotPrompt aiService;
 
     @PostMapping(
-            value = "/chain-of-thought",
+            value = "/few-shot-prompt",
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
-            produces = MediaType.APPLICATION_NDJSON_VALUE
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Flux<String> request(@RequestParam("question") String question) {
-        return aiService.process(question);
+    public String fewShotPrompt(@RequestParam("order") String order) {
+        String res = aiService.fewShotPrompt(order);
+        log.info(res.toString());
+        return res;
     }
 }

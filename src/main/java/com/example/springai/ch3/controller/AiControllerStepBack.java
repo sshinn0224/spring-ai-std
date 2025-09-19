@@ -1,5 +1,7 @@
-package com.example.springai.ch3;
+package com.example.springai.ch3.controller;
 
+
+import com.example.springai.ch3.service.AiServiceStepBackPrompt;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -9,21 +11,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/ai")
-@Slf4j
 @RequiredArgsConstructor
-public class AiControllerFewShotPrompt {
+@Slf4j
+@RequestMapping("/ai")
+public class AiControllerStepBack {
 
-    private final AiServiceFewShotPrompt aiService;
+    private final AiServiceStepBackPrompt aiService;
 
     @PostMapping(
-            value = "/few-shot-prompt",
+            value = "/step-back-prompt",
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
+            produces = MediaType.TEXT_PLAIN_VALUE
     )
-    public String fewShotPrompt(@RequestParam("order") String order) {
-        String res = aiService.fewShotPrompt(order);
-        log.info(res.toString());
-        return res;
+    public String request(@RequestParam("question") String question) throws Exception {
+        return aiService.process(question);
     }
 }
