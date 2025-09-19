@@ -1,0 +1,29 @@
+package com.example.springai.ch4.controller;
+
+import com.example.springai.ch4.service.AiServiceSystemMessage;
+import com.example.springai.ch4.service.dto.ReviewClassification;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/ai")
+@RequiredArgsConstructor
+@Slf4j
+public class AiControllerSystemMessage {
+
+    private final AiServiceSystemMessage aiService;
+
+    @PostMapping(
+            value ="/system-message",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ReviewClassification request(@RequestParam("review") String review) {
+        return aiService.process(review);
+    }
+}
