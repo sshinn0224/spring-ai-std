@@ -37,8 +37,40 @@ public class AiVisionController {
         Flux<String> flux = aiVisionService.imageAnalysis(question, attach.getContentType(), attach);
 
         return flux;
+    }
 
+    @PostMapping(
+            value = "/image-generate",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.TEXT_PLAIN_VALUE
+    )
+    public String imageGenerate(@RequestParam("description") String description) {
+        try {
+            String base64Json = aiVisionService.generateImage(description);
+            return base64Json;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error:" + e.getMessage();
+        }
+    }
 
+    @PostMapping(
+            value = "/image-edit",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.TEXT_PLAIN_VALUE
+    )
+    public String imageEdit(@RequestParam("description") String description,
+                            @RequestParam("originalImage") MultipartFile originalImage,
+                            @RequestParam("maskImage") MultipartFile maskImage) throws IOException {
+
+        try {
+            String b64Json = aiVisionService.editImage(description, originalImage.getBytes(), maskImage.getBytes());
+
+            return b64Json;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error:" + e.getMessage();
+        }
 
     }
 
