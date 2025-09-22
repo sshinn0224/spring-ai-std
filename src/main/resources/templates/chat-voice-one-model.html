@@ -38,6 +38,7 @@
         const formData = new FormData();
         formData.append("question", mp3Blob, 'speech.mp3');
 
+        console.log("chat-voice-one-model 실행")
         // 사용자 음성을 보내고 음성 답변을 받음
         const response = await fetch("/ai/chat-voice-one-model", {
           method: "post",
