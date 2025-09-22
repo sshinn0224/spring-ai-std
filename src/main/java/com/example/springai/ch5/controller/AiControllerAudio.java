@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/ai")
@@ -26,6 +27,7 @@ public class AiControllerAudio {
             produces = MediaType.TEXT_PLAIN_VALUE
     )
     public String stt(@RequestParam("speech") MultipartFile speech) throws IOException {
+        log.info("START STT...");
         return aiService.stt(speech);
     }
 
@@ -35,7 +37,19 @@ public class AiControllerAudio {
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
     )
     public byte[] tts(@RequestParam("text") String text) {
+        log.info("START TTS...");
         byte[] bytes = aiService.tts(text);
         return bytes;
+    }
+
+    @PostMapping(
+            value = "/chat-text",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public Map<String, String> chatText(@RequestParam("question") String question) {
+        log.info("START CHAT TEXT...");
+        Map<String,String> response = aiService.chatText(question);
+        return response;
     }
 }

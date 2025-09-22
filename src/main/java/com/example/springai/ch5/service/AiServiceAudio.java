@@ -16,6 +16,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class AiServiceAudio {
@@ -72,6 +75,24 @@ public class AiServiceAudio {
         byte[] bytes = response.getResult().getOutput();
 
         return bytes;
+    }
+
+    public Map<String,String> chatText(String question) {
+        String textAnswer = chatClient.prompt()
+                .system("50자 이내로 답변해 주세요")
+                .user(question)
+                .call()
+                .content();
+
+        byte[] audio = tts(textAnswer);
+        String base64Audio = Base64.getEncoder().encodeToString(audio);
+
+        // 텍스트 답변과 음성 답변을 map에 저장
+        Map<String, String> response = new HashMap<>();
+        response.put("text", textAnswer);
+        response.put("audio", base64Audio);
+
+        return response;
     }
 
 }
