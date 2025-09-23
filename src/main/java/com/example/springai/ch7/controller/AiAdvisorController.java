@@ -3,6 +3,7 @@ package com.example.springai.ch7.controller;
 import com.example.springai.ch7.service.AiAdvisorService1;
 import com.example.springai.ch7.service.AiAdvisorService2;
 import com.example.springai.ch7.service.AiAdvisorService3;
+import com.example.springai.ch7.service.AiAdvisorService4;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -20,6 +21,7 @@ public class AiAdvisorController {
     private final AiAdvisorService2 aiAdvisorService2;
     private final AiAdvisorService1 aiAdvisorService1;
     private final AiAdvisorService3 aiAdvisorService3;
+    private final AiAdvisorService4 aiAdvisorService4;
 
 //    @PostMapping(
 //            value = "/advisor-chain",
@@ -58,6 +60,15 @@ public class AiAdvisorController {
     )
     public String advisorLogging(@RequestParam("question") String question) {
         return aiAdvisorService3.advisorLogging(question);
+    }
+
+    @PostMapping(
+            value = "/advisor-safe-guard",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+            produces = MediaType.TEXT_PLAIN_VALUE
+    )
+    public String advisorSaveGuard(@RequestParam("question") String question) {
+        return aiAdvisorService4.advisorSafeGuard(question);
     }
 
 
