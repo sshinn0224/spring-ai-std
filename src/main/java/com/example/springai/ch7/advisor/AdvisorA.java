@@ -27,7 +27,6 @@ public class AdvisorA implements CallAdvisor, StreamAdvisor {
     public Flux<ChatClientResponse> adviseStream(ChatClientRequest chatClientRequest, StreamAdvisorChain streamAdvisorChain) {
         log.info("[전처리]");
         Flux<ChatClientResponse> response = streamAdvisorChain.nextStream(chatClientRequest);
-        log.info("[후처리]");
         return response;
     }
 
