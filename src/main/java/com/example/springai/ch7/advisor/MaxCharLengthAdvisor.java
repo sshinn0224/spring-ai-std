@@ -20,7 +20,6 @@ public class MaxCharLengthAdvisor implements CallAdvisor {
 
     @Override
     public ChatClientResponse adviseCall(ChatClientRequest request, CallAdvisorChain chain) {
-        log.info("전처리 작업 시작");
         // 전처리 작업
         ChatClientRequest mutatedRequest = augementPrompt(request);
         // 다음 Advisor 호출 또는 LLM 요청
@@ -39,7 +38,6 @@ public class MaxCharLengthAdvisor implements CallAdvisor {
         }
 
         String finalUserText = userText;
-        log.info("finalUserText: {}", finalUserText);
 
         // 사용자 메시지를 강화한 프롬프트 얻기
         Prompt origianlPrompt = request.prompt();
