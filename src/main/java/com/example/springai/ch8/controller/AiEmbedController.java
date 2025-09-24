@@ -27,4 +27,15 @@ public class AiEmbedController {
 
         return "서버 콘솔 터미널을 확인하세요";
     }
+
+    @PostMapping(
+            value = "/add-document",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+            produces = MediaType.TEXT_PLAIN_VALUE
+    )
+    public String addDocument(@RequestParam("question") String question) {
+        aiEmbedService.addDocument();
+
+        return "백터 저장소에 Document가 저장되었습니다.";
+    }
 }
