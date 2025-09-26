@@ -7,6 +7,7 @@ import org.springframework.ai.embedding.Embedding;
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.embedding.EmbeddingResponse;
 import org.springframework.ai.embedding.EmbeddingResponseMetadata;
+import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Service;
 
@@ -50,5 +51,26 @@ public class AiEmbedService {
 
         // 백터 저장소에 저장
         vectorStore.add(documents);
+    }
+
+    public List<Document> searchDocument1(String question) {
+        List<Document> documents = vectorStore.similaritySearch(question);
+        return documents;
+    }
+
+    public List<Document> searchDocument2(String question) {
+        List<Document> documents = vectorStore.similaritySearch(
+                SearchRequest.builder()
+                        .query(question)
+                        .topK(1)
+                        .similarityThreshold(0.4)
+                        .filterExpression("source == '헌법' && year >= 1987")
+                        .build()
+        );
+        return documents;
+    }
+
+    public void deleteDocument() {
+        vectorStore.delete("source == '헌법' && year < 1987");
     }
 }
