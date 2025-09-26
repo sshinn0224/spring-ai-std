@@ -44,7 +44,7 @@ dependencies {
     implementation 'org.springframework.ai:spring-ai-starter-vector-store-pgvector'
 
     // chat memory
-    implementation 'org.springframework.ai:spring-ai-advisor-vector-store';
+    implementation 'org.springframework.ai:spring-ai-advisors-vector-store';
 }
 
 dependencyManagement {
