@@ -40,7 +40,11 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation 'io.netty:netty-resolver-dns-native-macos:4.1.100.Final:osx-aarch_64'
 
+    // vector store
     implementation 'org.springframework.ai:spring-ai-starter-vector-store-pgvector'
+
+    // chat memory
+    implementation 'org.springframework.ai:spring-ai-advisor-vector-store';
 }
 
 dependencyManagement {
