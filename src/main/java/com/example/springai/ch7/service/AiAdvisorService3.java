@@ -7,7 +7,7 @@ import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Service;
 
-@Service
+
 @Slf4j
 public class AiAdvisorService3 {
 

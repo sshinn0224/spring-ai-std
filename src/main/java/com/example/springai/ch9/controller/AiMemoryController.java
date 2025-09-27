@@ -1,5 +1,6 @@
 package com.example.springai.ch9.controller;
 
+import com.example.springai.ch9.service.AiMemoryCassandraService;
 import com.example.springai.ch9.service.AiMemoryRDBService;
 import com.example.springai.ch9.service.AiMemoryService;
 import com.example.springai.ch9.service.AiMemoryVectorService;
@@ -20,7 +21,8 @@ public class AiMemoryController {
 
 //    private final AiMemoryService aiMemoryService;
 //    private final AiMemoryVectorService aiMemoryVectorService;
-    private final AiMemoryRDBService aiMemoryRDBService;
+//    private final AiMemoryRDBService aiMemoryRDBService;
+    private final AiMemoryCassandraService aiMemoryCassandraService;
 
     @PostMapping(
             value = "/chat",
@@ -28,6 +30,6 @@ public class AiMemoryController {
             produces = MediaType.TEXT_PLAIN_VALUE
     )
     public String doRequest(@RequestParam("question") String question, HttpSession session) {
-        return aiMemoryRDBService.chat(question, session.getId());
+        return aiMemoryCassandraService.chat(question, session.getId());
     }
 }

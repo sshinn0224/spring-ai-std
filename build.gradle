@@ -47,7 +47,10 @@ dependencies {
     implementation 'org.springframework.ai:spring-ai-advisors-vector-store'
     // jdbc
     implementation 'org.postgresql:postgresql:42.7.5'
-    implementation 'org.springframework.ai:spring-ai-starter-model-chat-memory-repository-jdbc'
+//    implementation 'org.springframework.ai:spring-ai-starter-model-chat-memory-repository-jdbc'
+
+    // cassandra
+    implementation 'org.springframework.ai:spring-ai-starter-model-chat-memory-repository-cassandra'
 }
 
 dependencyManagement {

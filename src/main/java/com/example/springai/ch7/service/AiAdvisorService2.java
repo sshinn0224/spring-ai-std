@@ -6,7 +6,7 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Service;
 
-@Service
+
 @Slf4j
 public class AiAdvisorService2 {
     private ChatClient chatClient;
