@@ -40,6 +40,11 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation 'io.netty:netty-resolver-dns-native-macos:4.1.100.Final:osx-aarch_64'
 
+    // spring ai
+    implementation 'org.springframework.ai:spring-ai-pdf-document-reader'
+    implementation 'org.springframework.ai:spring-ai-tika-document-reader'
+
+
     // vector store
     implementation 'org.springframework.ai:spring-ai-starter-vector-store-pgvector'
 
@@ -48,9 +53,10 @@ dependencies {
     // jdbc
     implementation 'org.postgresql:postgresql:42.7.5'
 //    implementation 'org.springframework.ai:spring-ai-starter-model-chat-memory-repository-jdbc'
-
     // cassandra
     implementation 'org.springframework.ai:spring-ai-starter-model-chat-memory-repository-cassandra'
+    //
+
 }
 
 dependencyManagement {
