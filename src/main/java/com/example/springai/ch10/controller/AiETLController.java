@@ -33,4 +33,17 @@ public class AiETLController {
 
         return etlService.etlFromFile(title, author, attach);
     }
+
+    @PostMapping(
+            value = "/html-etl",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.TEXT_PLAIN_VALUE
+    )
+    public String htmlEtl(@RequestParam("title") String title,
+                          @RequestParam("author") String author,
+                          @RequestParam("url") String url) throws IOException {
+        return etlService.etlFromHtml(title, author, url);
+
+    }
+
 }
