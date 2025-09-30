@@ -6,6 +6,8 @@ import org.springframework.ai.document.Document;
 import org.springframework.ai.document.DocumentReader;
 import org.springframework.ai.document.DocumentTransformer;
 import org.springframework.ai.model.transformer.KeywordMetadataEnricher;
+import org.springframework.ai.reader.JsonMetadataGenerator;
+import org.springframework.ai.reader.JsonReader;
 import org.springframework.ai.reader.TextReader;
 import org.springframework.ai.reader.jsoup.JsoupDocumentReader;
 import org.springframework.ai.reader.jsoup.config.JsoupDocumentReaderConfig;
@@ -127,6 +129,35 @@ public class ETLService {
 
         return "html 에서 추출-변환-적재 완료 했습니다.";
 
+    }
+
+    public String etlFromJson(String url) throws Exception {
+        Resource resource = new UrlResource(url);
+
+        // E : 추출하기
+        JsonReader reader = new JsonReader(
+                resource,
+                new JsonMetadataGenerator() {
+                    @Override
+                    public Map<String, Object> generate(Map<String, Object> jsonMap) {
+                        return Map.of("title", jsonMap.get("title"),
+                                "author", jsonMap.get("author"),
+                                "url",url);
+                    }
+                }
+        );
+
+        List<Document> documents = reader.read();
+        log.info("추출 된 Document수 : {} 개", documents.size());
+
+        // T: 변환하기
+        DocumentTransformer documentTransformer = new TokenTextSplitter();
+        List<Document> transformedDocuments = documentTransformer.apply(documents);
+        log.info("변환 된 Document 수: {}개",  transformedDocuments.size());
+
+        vectorStore.add(transformedDocuments);
+
+        return "JSON에서 추출-변환-적재 완료 하였습니다.";
     }
 
 

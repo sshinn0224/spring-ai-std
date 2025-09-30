@@ -46,4 +46,13 @@ public class AiETLController {
 
     }
 
+    @PostMapping(
+            value = "/json-etl",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.TEXT_PLAIN_VALUE
+    )
+    public String jsonEtl(@RequestParam("url") String url) throws Exception {
+        return etlService.etlFromJson(url);
+    }
+
 }
