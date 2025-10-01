@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.print.attribute.standard.Media;
 import java.io.IOException;
 
 @RestController
@@ -38,5 +39,16 @@ public class RagController {
         ragService1.ragEtl(attach, source, chunkSize, minChunkSizeChars);
 
         return "PDF ETL 과정을 성공적으로 처리 했습니다.";
+    }
+
+    @PostMapping(
+            value = "/rag-chat",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+            produces = MediaType.TEXT_PLAIN_VALUE
+    )
+    public String ragChat(@RequestParam("question") String question,
+                          @RequestParam(value = "score", defaultValue = "0.0") double score,
+                          @RequestParam("source") String source) {
+        return ragService1.ragChat(question, score, source);
     }
 }
